@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-  <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/styles.css?v=3" />
 </head>
 <body>
   <header class="site-header">
@@ -127,7 +127,6 @@
       </div>
       <div class="about-actions">
         <button class="btn btn-outline" id="importBtn" type="button">JSON 가져오기</button>
-        <button class="btn btn-outline" id="restoreBtn" type="button">기본 데이터로 되돌리기</button>
         <input type="file" id="importFile" accept="application/json,.json" hidden />
       </div>
     </section>
@@ -142,7 +141,7 @@
 
   <!-- Edit dialog -->
   <dialog class="modal" id="editor">
-    <form method="dialog" class="modal-form" id="editorForm">
+    <form class="modal-form" id="editorForm" novalidate>
       <div class="modal-head">
         <h3 class="display-3" id="editorTitle">인원 등록</h3>
         <button type="button" class="icon-btn" data-close aria-label="닫기">
@@ -153,7 +152,7 @@
         <div class="form-row">
           <label class="field"><span>이름 *</span><input name="name" required /></label>
           <label class="field"><span>학과</span><input name="dept" list="deptList" placeholder="예: 경영학부" /></label>
-          <label class="field field-sm"><span>학번</span><input name="year" inputmode="numeric" maxlength="2" placeholder="22" /></label>
+          <label class="field field-sm"><span>학번</span><input name="year" inputmode="numeric" placeholder="22" /></label>
         </div>
         <div class="form-row">
           <label class="field field-md"><span>구분 *</span>
@@ -162,7 +161,7 @@
               <option>1차생</option>
             </select>
           </label>
-          <label class="field field-sm"><span>나이</span><input name="age" inputmode="numeric" maxlength="2" placeholder="24" /></label>
+          <label class="field field-sm"><span>나이</span><input name="age" inputmode="numeric" placeholder="24" /></label>
           <label class="field"><span>유예과목 수</span>
             <select name="deferred">
               <option value="">해당 없음</option>
@@ -176,8 +175,8 @@
           </label>
         </div>
         <div class="form-row">
-          <label class="field"><span>수험기간 (년)</span><input name="studyYears" type="number" min="0" max="20" placeholder="2" /></label>
-          <label class="field"><span>수험기간 (개월)</span><input name="studyMonthsPart" type="number" min="0" max="11" placeholder="6" /></label>
+          <label class="field"><span>수험기간 (년)</span><input name="studyYears" inputmode="numeric" placeholder="2" /></label>
+          <label class="field"><span>수험기간 (개월)</span><input name="studyMonthsPart" inputmode="numeric" placeholder="6" /></label>
         </div>
         <label class="field"><span>학력 <em>한 줄에 하나씩</em></span><textarea name="education" rows="3" placeholder="경북대학교 / 통계학과 학사 / 2021.03~2025.02"></textarea></label>
         <label class="field"><span>활동/수상 <em>한 줄에 하나씩</em></span><textarea name="activities" rows="4"></textarea></label>
@@ -188,14 +187,14 @@
         <button type="button" class="btn btn-danger-text" id="deleteBtn">삭제</button>
         <div class="spacer"></div>
         <button type="button" class="btn btn-outline" data-close>취소</button>
-        <button type="submit" class="btn btn-primary" value="save">저장</button>
+        <button type="submit" class="btn btn-primary" id="saveBtn">저장</button>
       </div>
     </form>
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="assets/data.js"></script>
-  <script src="assets/app.js"></script>
+  <script src="assets/data.js?v=3"></script>
+  <script src="assets/app.js?v=3"></script>
 </body>
 </html>

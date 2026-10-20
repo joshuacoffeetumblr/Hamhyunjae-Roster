@@ -19,6 +19,7 @@
 }
 
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 html { scroll-behavior: smooth; scroll-padding-top: 88px; }
 body {
   margin: 0;
@@ -258,12 +259,14 @@ td.wrap { white-space: normal; min-width: 200px; }
 .field input, .field select { height: 44px; }
 .field textarea { resize: vertical; line-height: 1.5; }
 .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--blue); box-shadow: 0 0 0 3px var(--blue-tint); }
+.field input.is-invalid { border-color: var(--danger); box-shadow: 0 0 0 3px #fbeeee; }
+.field input.is-invalid::placeholder { color: var(--danger); }
 
 /* Toast */
 .toast {
   position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px); opacity: 0;
   background: var(--ink); color: #fff; padding: 12px 20px; border-radius: var(--radius); font-size: 14px;
-  transition: opacity .2s, transform .2s; pointer-events: none; z-index: 50;
+  transition: opacity .2s, transform .2s; pointer-events: none; z-index: 1000;
 }
 .toast.is-show { opacity: 1; transform: translate(-50%, 0); }
 

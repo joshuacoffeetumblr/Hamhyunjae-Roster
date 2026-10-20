@@ -275,6 +275,8 @@
     $("#editorTitle").textContent = m ? "정보 수정" : "인원 등록";
     $("#deleteBtn").hidden = !m;
     form.reset();
+    f.name.classList.remove("is-invalid");
+    f.name.placeholder = "";
     const v = m || { group: state.mode === "1차생" ? "1차생" : "2차생", age: null, deferred: null, studyMonths: null };
     f.name.value = v.name || "";
     f.group.value = v.group;
@@ -307,7 +309,12 @@
       activities: f.activities.value,
       certificates: f.certificates.value
     });
-    if (!data.name) { f.name.focus(); return; }
+    if (!data.name) {
+      f.name.classList.add("is-invalid");
+      f.name.placeholder = "이름을 입력해 주세요";
+      f.name.focus();
+      return;
+    }
     if (state.editingId) {
       const i = state.members.findIndex((x) => x.id === state.editingId);
       state.members[i] = data;
@@ -330,6 +337,8 @@
     render();
     toast(`${m.name}님을 삭제했습니다`);
   });
+
+  f.name.addEventListener("input", () => f.name.classList.remove("is-invalid"));
 
   $$("[data-close]", editor).forEach((b) => b.addEventListener("click", () => editor.close()));
   editor.addEventListener("click", (e) => { if (e.target === editor) editor.close(); });
@@ -455,14 +464,6 @@
     } catch {
       alert("올바른 연명부 JSON 파일이 아닙니다.");
     }
-  });
-
-  $("#restoreBtn").addEventListener("click", () => {
-    if (!confirm("이 브라우저에서 수정한 내용을 지우고 기본 데이터로 되돌릴까요?")) return;
-    try { localStorage.removeItem(STORAGE_KEY); } catch { /* ignore */ }
-    state.members = (window.SEED_MEMBERS || []).map(normalize);
-    render();
-    toast("기본 데이터로 되돌렸습니다");
   });
 
   // ---------- init ----------
